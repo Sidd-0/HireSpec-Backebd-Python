@@ -40,7 +40,7 @@ is_production = (
     or os.getenv("RENDER") == "true"
 )
 
-frontend_origin = os.getenv("FRONTEND_ORIGIN", "https://hire-spec-frontend.vercel.app/")
+frontend_origin = os.getenv("FRONTEND_ORIGIN", "https://hire-spec-frontend.vercel.app")
 allowed_origins_env = os.getenv("ALLOWED_ORIGINS", frontend_origin)
 allowed_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
 
