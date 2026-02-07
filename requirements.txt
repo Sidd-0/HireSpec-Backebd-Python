@@ -1,3 +1,6 @@
+# Install numpy first (required before mediapipe)
+numpy>=1.26.4
+
 # Core Flask dependencies
 Flask==3.0.0
 flask-cors==4.0.0
@@ -15,13 +18,15 @@ wheel==0.44.0
 mysql-connector-python==8.3.0
 
 # Image Processing & ML
-Pillow==10.2.0
-numpy==1.26.4
-opencv-python-headless==4.9.0.80
-mediapipe==0.10.14
-facenet-pytorch==2.6.0
-torch==2.2.2
-torchvision==0.17.2
+Pillow>=10.4.0
+opencv-python-headless>=4.9.0.80
+mediapipe>=0.10.11
+facenet-pytorch>=2.6.0
+
+# PyTorch CPU-only (smaller footprint for deployment)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.2.0
+torchvision>=0.17.0
 
 # Vector Database
-pinecone-client==5.0.1
+pinecone-client>=5.0.1

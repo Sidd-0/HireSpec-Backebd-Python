@@ -2,9 +2,9 @@ services:
   - type: web
     name: face-auth-backend
     env: python
-    runtime: python-3.11.8
+    runtime: python
     plan: starter
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install numpy && pip install -r requirements.txt
     startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120 app:app
     healthCheckPath: /health
     autoDeploy: true
@@ -18,4 +18,4 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: PYTHON_VERSION
-        value: 3.11.8
+        value: "3.11.9"
