@@ -47,5 +47,5 @@ ENV PORT=5000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')" || exit 1
 
-# Start application with gunicorn (shell form for proper variable expansion)
-CMD exec gunicorn --bind "0.0.0.0:${PORT:-5000}" --workers 2 --threads 4 --timeout 120 app:app
+# Start application via Python runner (ensures PORT is read from environment)
+CMD ["python", "run.py"]
