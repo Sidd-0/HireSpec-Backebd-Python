@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: face-auth-backend
+    env: python
+    runtime: python
+    plan: starter
+    buildCommand: pip install --upgrade pip setuptools wheel && pip install numpy==1.26.4 && pip install torch==2.2.2+cpu torchvision==0.17.2+cpu --index-url https://download.pytorch.org/whl/cpu && pip install mediapipe==0.10.11 --no-build-isolation && pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120 app:app
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: COOKIE_SAMESITE
+        value: None
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: "3.11.9"
