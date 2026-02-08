@@ -30,9 +30,7 @@ COPY . .
 
 # Create uploads directory and set permissions
 RUN mkdir -p uploads/resumes && \
-    chmod -R 755 uploads && \
-    chmod +x start.sh && \
-    sed -i 's/\r$//' start.sh
+    chmod -R 755 uploads
 
 # Create non-root user for security
 RUN adduser --disabled-password --gecos '' appuser && \
@@ -49,5 +47,5 @@ ENV PORT=5000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')" || exit 1
 
-# Start application with gunicorn
-CMD ["sh", "-c", "exec gunicorn --bind 0.0.0.0:${PORT:-5000} --workers 2 --threads 4 --timeout 120 app:app"]
+# Start application with gunicorn (shell form for proper variable expansion)
+CMD exec gunicorn --bind "0.0.0.0:${PORT:-5000}" --workers 2 --threads 4 --timeout 120 app:app
