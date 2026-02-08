@@ -43,9 +43,5 @@ EXPOSE 5000
 # Set default PORT (can be overridden by cloud platforms)
 ENV PORT=5000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')" || exit 1
-
-# Start application via Python runner (ensures PORT is read from environment)
-CMD ["python", "run.py"]
+# Start application directly (Flask reads PORT from environment)
+CMD ["python", "app.py"]
