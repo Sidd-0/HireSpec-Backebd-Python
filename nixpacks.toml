@@ -1,0 +1,5 @@
+[phases.setup]
+aptPkgs = ["libgl1", "libglib2.0-0", "libsm6", "libxrender1", "libxext6"]
+
+[start]
+cmd = "gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 120"
